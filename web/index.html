@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="comerce">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>comerce</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <input type="email" id="email" placeholder="Email">
+<input type="password" id="senha" placeholder="Senha">
+<button onclick="login()">Entrar</button>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+  
+    const firebaseConfig = {
+      apiKey: "AIzaSyDJ4pgUBEt47dXzH1dbnGPW8t9T5edKUPA",
+      authDomain: "comerce-9147d.firebaseapp.com",
+      projectId: "comerce-9147d",
+      storageBucket: "comerce-9147d.appspot.com",
+      messagingSenderId: "797134509073",
+      appId: "1:797134509073:web:9a8ac1979954ece2e84db0"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+  
+    // Exemplo de login
+    window.login = async function () {
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
+  
+      try {
+        const credenciais = await signInWithEmailAndPassword(auth, email, senha);
+        console.log("Usuário logado:", credenciais.user.email);
+  
+        const token = await credenciais.user.getIdToken();
+        console.log("Token JWT:", token);
+  
+        // Aqui você pode enviar o token para o backend (Dark)
+      } catch (erro) {
+        alert("Erro ao logar: " + erro.message);
+      }
+    };
+  </script>
+  
+
+</body>
+</html>
