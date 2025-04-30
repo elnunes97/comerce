@@ -19,4 +19,6 @@ class UserModel {
       role: data['role'] ?? 'cliente',
     );
   }
+
+  static empty() {}
 }
